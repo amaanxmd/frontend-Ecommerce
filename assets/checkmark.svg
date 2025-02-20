@@ -1,0 +1,5 @@
+<svg height="20" width="20" data-testid="checkmark-svg" xmlns="http://www.w3.org/2000/svg" id="checkmark" viewBox="0 0 19 19"  aria-hidden="true">
+
+<path fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" d="m2.5 10.5 4 4 10-10"/> 
+
+</svg>
