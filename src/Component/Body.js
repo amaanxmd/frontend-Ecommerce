@@ -30,10 +30,10 @@ const Body = () => {
   const status =useOnline()
 // if(status ===false){return <div>Please turn on the internet connection</div>}
   return  (
-    <div className={`sm:px-4 md:px-16 lg:px-32 ${filteredData.length<20 && "pb-64"} pb-16`}>
+    <div className={`sm:px-4 md:px-16 lg:px-32 ${filteredData.length<20 && "pb-64"} pb-32`}>
      
     
-      <div className="filterResetInput  flex">
+      <div className="filterResetInput px-2 sm:px-0 flex">
         
         <FilterandSort setprevAndNext={setprevAndNext} originalData ={originalData} filteredData ={filteredData} setfilteredData ={setfilteredData}/> 
          

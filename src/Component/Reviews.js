@@ -46,7 +46,7 @@ const Reviews = ({accorOpen,setaccorOpen,model_number}) => {
                <div>
                <p>{reviews.text}</p>
                <div className='flex gap-x-2 relative  md:gap-4 w-full md:flex-wrap py-3 overflow-auto'>
-               {reviews.photos.map((img)=><img onClick={(e)=>setshowBigger([true,e])} className='h-32 shrink-0' src={img.normalUrl}/>)}
+               {reviews.photos.map((img,index)=><img key={index} onClick={(e)=>setshowBigger([true,e])} className='h-32 shrink-0' src={img.normalUrl}/>)}
                {showBigger[0]&&<div className='fixed h-1/2 md:h-[90vh] w-max md:w-auto  top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 z-20  overflow-auto'><div onClick={()=>setshowBigger([false])} className='p-4 bg-white text-black absolute top-0 right-0 '>&#x2716;</div><img className='h-full w-full md:h-auto md:w-auto' src={showBigger[1].target.src}/></div>}
                {showBigger[0] && <div className='h-screen w-full fixed z-10 top-0 left-0 bg-black/10'></div>}
                </div>

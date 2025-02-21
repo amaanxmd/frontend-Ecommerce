@@ -79,7 +79,7 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
             </div>}
           </div>
         </nav>
-       {path.pathname==="/"&&<div className="relative"> <img src={img3} alt="lebron-nike" className=" relative sliderimg w-full h-60 sm:h-72 md:h-80 lg:h-fit scale-x-[2.15] sm:scale-x-[1.3] md:scale-x-[1.5] lg:scale-x-[1]" /> <div  className="navchild8   sm:hidden p-2  border border-black font-semibold absolute top-full mt-3 left-0 z-10 "><Link className=" flex  flex-wrap" to ="/cart">cart-Items ({cartItems||cartItemsFromFirebase})</Link></div></div>}
+       {path.pathname==="/"&&<div className="relative"> <img src={img3} alt="lebron-nike" className=" relative sliderimg w-full h-60 sm:h-72 md:h-80 lg:h-fit translate-x-3 sm:translate-x-0 scale-x-[2.15] sm:scale-x-[1.3] md:scale-x-[1.5] lg:scale-x-[1]" /> <div  className="navchild8 ml-2  sm:hidden p-2  border border-black font-semibold absolute top-full mt-3 left-0 z-10 "><Link className=" flex  flex-wrap" to ="/cart">cart-Items ({cartItems||cartItemsFromFirebase})</Link></div></div>}
         <Outlet/>
       </div>
     );

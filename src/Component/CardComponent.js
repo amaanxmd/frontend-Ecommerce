@@ -191,7 +191,7 @@ const CardComponent = (prop) => {
             </div>
           </div>
           <div className="imgWrapper">
-          { id && <Link to={`/${id}`} state={{index,cardInfo}}>{imageHovered?<img className="img "  src={cardData.hoverImage} alt="shoeimage" />:<img className="img" src={cardData.image} alt="shoeimage" />}</Link>}
+          { id && <Link to={`/${id}`}  state={{index,cardInfo}}>{imageHovered?<img className="img "  src={cardData.hoverImage} alt="shoeimage" />:<img className="img" src={cardData.image} alt="shoeimage" />}</Link>}
           </div>
           </div>
           {addToCart &&<SubCards cardData={{image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url}} setcardData={setcardData} subCardData ={subCardData} />}

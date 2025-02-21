@@ -15,8 +15,9 @@ import { manageCount,addItem } from "../utils/slice"
 const ProductDetails =()=>{
   const location =useLocation()
   const navigate =useNavigate()
-  const [index,setindex] = useState(location.state.index)
-  const [cardInfo,setcardInfo]=useState(location.state.cardInfo)
+  const [index,setindex] = useState(location.state?.index)
+
+  const [cardInfo,setcardInfo]=useState(location.state?.cardInfo)
  
   const dispatch = useDispatch()
   const count = useSelector((store)=>{return store.cart.count[index]})
@@ -64,9 +65,11 @@ const ProductDetails =()=>{
    }
 
   }
- 
+ console.log(cardInfo)
+ console.log(index)
   const[availability,setavailability]=useState(null)
   const [buttonText,setbuttonText]=useState(null)
+  useEffect(()=>{if(!cardInfo){navigate("/")}})
   const {id} =useParams()
   function getAvalabilityStatus(){
     fetch(`https://www.adidas.co.in/api/products/${id}/availability`).then((result)=>result.json()).then((result)=>setavailability(result)).catch((e)=>console.log(e))
@@ -80,13 +83,13 @@ const [currentSizeSelected,setcurrentSizeSelected]=useState(null)
  
 
 return (
-  <div className="flex w-full overflow-x-hidden flex-col md:flex-row flex-wrap">
+  <div className="flex w-full   overflow-x-hidden flex-col md:flex-row flex-wrap">
     <div className="md:w-2/3 ">
       <div className="relative  ">
         <div
           className={
-            " flex snap-x snap-mandatory   md:grid overflow-hidden     md:grid-flow-row md:grid-cols-2 w-full " +
-            (showMore ? "md:h-full  " : "md:h-screen md:overflow-hidden")
+            " flex snap-x snap-mandatory     md:grid overflow-auto scrollbar-none     md:grid-flow-row md:grid-cols-2 w-full " +
+            (showMore ? "md:h-full  " : "md:h-screen md:overflow-hidden ")
           }
         >
           {currentCardData.view_list?.map((properties, index) =>
@@ -106,7 +109,7 @@ return (
                   className="snap-start shrink-0 w-full h-full overflow-clip"
                 >
                   <img
-                    className="hover:scale-150 h-full w-full transition-transform duration-500"
+                    className="hover:scale-150 h-full w-full aspect-square  transition-transform duration-500"
                     src={properties.image_url}
                   />
                 </div>
@@ -114,10 +117,10 @@ return (
             ) : (
               <div
                 key={index}
-                className=" snap-start h-full w-full shrink-0  overflow-clip"
+                className=" snap-start h-full w-full  shrink-0  overflow-clip"
               >
                 <img
-                  className="hover:scale-150 h-full w-full transition-transform duration-500"
+                  className="hover:scale-150 h-full w-full aspect-square transition-transform duration-500"
                   src={properties.image_url}
                 />
               </div>
@@ -148,8 +151,11 @@ return (
       <Accordion currentCardData={currentCardData} />
     </div>
 
-    <div className=" md:w-1/3 px-6 flex flex-col gap-y-6 py-6">
-      <div className="flex justify-between ">
+    <div className=" md:w-1/3    px-6 flex flex-col gap-y-6 py-6">
+    
+
+    
+      <div className="flex justify-between">
         <div>{currentCardData.attribute_list?.brand}</div>
         {/* <div>{"stars"}</div> */}
       </div>
@@ -233,6 +239,7 @@ return (
           <li className="list-disc ">Save 5% on all Online Payments under Rs 5000/-</li>
         </ul>
       </div>
+      
     </div>
     <Footer/>
   </div>
