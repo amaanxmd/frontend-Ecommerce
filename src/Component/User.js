@@ -29,7 +29,7 @@ const User =()=>{
     }
     return <div onClick={(e)=>{setshowdetails(!showdetails)}} className="relative ">
          <DefaultUser/>
-         {<div className={`fixed flex justify-center items-center flex-col -top-full ${showdetails&&"translate-y-full"} transition-transform duration-500 ease-in-out left-0 z-20 p-2 bg-black/50 w-full  h-screen`}>
+         {<div className={`fixed flex justify-center items-center flex-col -top-full  ${showdetails&&"translate-y-full"} transition-transform duration-500 ease-in-out left-0 z-20 p-2 bg-black/50 w-full  h-screen`}>
             <div onClick={(e)=>e.stopPropagation()} className="bg-white border flex flex-col flex-wrap gap-y-3 items-center  border-black p-8 w-full sm:w-2/3 md:w-1/2 lg:w-1/4 ">
               <div className="flex flex-col flex-wrap gap-y-3">
 

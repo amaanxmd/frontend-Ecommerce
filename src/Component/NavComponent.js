@@ -53,8 +53,8 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
     return (
       <div className="w-full overflow-x-hidden">
         <nav className="bar">
-          <div className="navparent px-4 md:px-16 lg:px-32  py-4 flex items-center shadow-md justify-between flex-wrap">
-            <Link onClick={()=>{hamburger&&sethamburger(!hamburger)}} to={"/"}><AdidasLogo/></Link>
+          <div className="navparent px-4 md:px-16 lg:px-32  sm:py-4 flex items-center shadow-md justify-between flex-wrap">
+            <Link className="py-1 sm:py-0" onClick={()=>{hamburger&&sethamburger(!hamburger)}} to={"/"}><AdidasLogo/></Link>
   
             <div className="navchildcontainer relative hidden sm:flex  sm:gap-6 md:gap-10 lg:gap-20">
               <div className="navchild1"><Link className="home" to="/">Home</Link></div>
@@ -63,19 +63,19 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
               <div className="navchild8"><Link to ="/cart">cart-Items ({cartItems||cartItemsFromFirebase})</Link></div>
               
             </div>
-              <div onClick={()=>{sethamburger(!hamburger)}} className="sm:hidden text-5xl  leading-tight pb-3">{hamburger?"\u2715":"\u2630"}
+              <div onClick={()=>{sethamburger(!hamburger)}} className="sm:hidden text-3xl  leading-tight ">{hamburger?"\u2715":"\u2630"}
               </div>
-               {hamburger&& <div className=" sm:hidden w-full shrink-0 bg-white flex flex-col gap-y-3   ">
-                <div onClick={()=>sethamburger(!hamburger)} className="navchild1 border-b"><Link className="home" to="/">Home</Link></div>
-              <div onClick={()=>sethamburger(!hamburger)} className="navchild2 border-b"><Link to="/about">About</Link></div>
+               {hamburger&& <div className=" sm:hidden w-full shrink-0 bg-white flex flex-col gap-y-3 mt-3   ">
+                <div onClick={()=>sethamburger(!hamburger)} className="navchild1 border-b"><Link className="home font-medium" to="/">Home</Link></div>
+              <div onClick={()=>sethamburger(!hamburger)} className="navchild2 border-b"><Link  className="about font-medium" to="/about">About</Link></div>
               {/* <div className="navchild6">online Status: {useOnline()?'true':"false"}</div> */}
               
                 </div>}
               
             {<div className={`${hamburger?"":"hidden"} flex flex-col sm:flex-row sm:flex gap-y-3  mt-3 sm:mt-0 sm:gap-2  sm:items-center`}>
               {account&&<User/>}
-              {!account&&<button onClick={()=>{navigate('./signin');hamburger&&sethamburger(!hamburger)}} className="bg-black  text-white rounded py-1 mt-3 sm:mt-0 px-3">Sign In </button>}
-              {account&&<button onClick={()=>{signOut(auth).then(()=>console.log("signedOut"));hamburger&&sethamburger(!hamburger)}} className="border  border-black  rounded py-1 px-3">Sign Out</button>}
+              {!account&&<button onClick={()=>{navigate('./signin');hamburger&&sethamburger(!hamburger)}} className="bg-black  text-white rounded py-1 mt-3 mb-3 sm:mb-0 sm:mt-0 px-3">Sign In </button>}
+              {account&&<button onClick={()=>{signOut(auth).then(()=>console.log("signedOut"));hamburger&&sethamburger(!hamburger)}} className="border  border-black mb-3 sm:mb-0  rounded py-1 px-3">Sign Out</button>}
             </div>}
           </div>
         </nav>

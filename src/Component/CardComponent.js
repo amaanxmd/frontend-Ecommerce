@@ -178,7 +178,7 @@ const CardComponent = (prop) => {
     }
     
     return (
-      <div onMouseEnter={()=>{setaddToCart(true)}} onMouseLeave={()=>{setaddToCart(false);setcardData({image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url})}} className={ ('w-[calc((100%-4px)/2)] sm:w-[calc((100%-24px)/3)] md:w-[calc((100%-36px)/4)] lg:w-[calc((100%-36px)/4)] ')+(addToCart?'h-1 z-10':'h-full') }>
+      <div onMouseEnter={()=>{setaddToCart(true)}} onMouseLeave={()=>{setaddToCart(false);setcardData({image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url})}} className={ ('w-[calc((100%-4px)/2)] sm:w-[calc((100%-24px)/3)] md:w-[calc((100%-36px)/4)] lg:w-[calc((100%-36px)/4)] ')+(addToCart?'h-72 z-10':'h-full') }>
         <div className="container w-full  hover:border-2 hover:border-black relative bg-white" >
           <div onMouseEnter={()=>setimageHovered(true)} onMouseLeave={()=>{setimageHovered(false)}}>
           <div className="header flex justify-between w-full absolute top-0 px-2 py-2">
