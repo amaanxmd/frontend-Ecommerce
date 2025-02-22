@@ -11,8 +11,10 @@ export const Accordion = ({currentCardData})=>{
     
     
   // }
+ 
   return (
     <div className="reviewcontainer  px-4  sm:mt-24 mt-6 ">
+      
       <Reviews model_number={currentCardData.model_number} accorOpen={accorOpen} setaccorOpen ={setaccorOpen}/>
       <div className="border-b-2 py-8">
         <div className="flex justify-between items-center">

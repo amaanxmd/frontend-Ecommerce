@@ -13,11 +13,11 @@ const cartslice = createSlice({
             // mystate.count[myaction.payload.index]=mystate.count[myaction.payload.index]+1
             if(myaction.payload){
                 mystate.myitems.length=myaction.payload.length
-                console.log(myaction.payload)
+                
             }else{
 
                 mystate.myitems.push(1)
-                console.log(myaction.payload)
+                
             }
         },
         removeItem:(mystate,myaction)=>{

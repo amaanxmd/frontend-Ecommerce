@@ -22,8 +22,8 @@ const Reviews = ({accorOpen,setaccorOpen,model_number}) => {
     }
   const [offset,setoffset] =useState( 0)
   const [showBigger,setshowBigger]=useState([])
-  const reviewList = useReviews(model_number,offset)
-  
+  const reviewList =useReviews(model_number,offset)
+//   console.log(reviewList)
   return reviewList?<div className='border-b-2 border-t-2 py-8'>
         <div className='flex justify-between items-center'>
             <p className='font-bold'>Reviews</p>
@@ -31,7 +31,7 @@ const Reviews = ({accorOpen,setaccorOpen,model_number}) => {
         </div>
         {accorOpen[0]?<div className='relative'>
            
-           { reviewList.map((reviews,index)=><div key={index} className='flex justify-between py-6 border-b-2'>
+           { reviewList.productReviews.map((reviews,index)=><div key={index} className='flex justify-between py-6 border-b-2'>
 
             <div className='w-1/3'>
                 <h2>{handleRating(reviews.rating)}</h2>
@@ -56,7 +56,7 @@ const Reviews = ({accorOpen,setaccorOpen,model_number}) => {
 
            </div>)}
             <div className='relative flex w-full pt-8 items-center justify-center'>
-            <button className='border-black border p-4 font-bold ' onClick={()=>{setoffset(offset+7)}}>Read More Reviews</button>
+            {reviewList.productReviews.length<reviewList.totalReviews&&<button className='border-black border p-4 font-bold ' onClick={()=>{setoffset(offset+7)}}>Read More Reviews</button>}
              </div>
         </div>:null}
     </div>:""

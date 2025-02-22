@@ -46,7 +46,6 @@ const getAllData = async()=>{
 async function clearcart(){
 
     dispatch(addItem({length:0}))
-    console.log(cartData)
     await updateDoc(doc(db,auth.currentUser.uid+"cart",auth.currentUser.uid+"cartItems"),{
       cartItems:0
     })
@@ -56,7 +55,6 @@ async function clearcart(){
 
 
 }
-console.log(cartData.length)
 return <div className="px-4 md:px-16 lg:px-32 ">{cartData?.length!==0?<div className=" pt-6 "><button className=" flex px-3 py-2 border font-semibold border-black ml-auto" onClick={clearcart}>clear cart</button><div className="cardContainer flex pb-60 md:pb-52 lg:pb-64 overflow-hidden gap-x-1 sm:gap-x-3 gap-y-4  flex-wrap  border-t pt-3" >
 {/* {card.map((cardInfo,index)=><CardComponent key={index} index={index} cardInfo={cardInfo}/>)} */}
 {/* {cartData?.map((doc)=>{return <CardComponent index={Object.keys(doc)[0]} key ={Object.keys(doc)[0]} cardInfo={doc["cardInfo"]}/>})} */}

@@ -16,7 +16,7 @@ const ProductDetails =()=>{
   const location =useLocation()
   const navigate =useNavigate()
   const [index,setindex] = useState(location.state?.index)
-
+  
   const [cardInfo,setcardInfo]=useState(location.state?.cardInfo)
  
   const dispatch = useDispatch()
@@ -65,8 +65,8 @@ const ProductDetails =()=>{
    }
 
   }
- console.log(cardInfo)
- console.log(index)
+//  console.log(cardInfo)
+//  console.log(index)
   const[availability,setavailability]=useState(null)
   const [buttonText,setbuttonText]=useState(null)
   useEffect(()=>{if(!cardInfo){navigate("/")}})
@@ -80,7 +80,7 @@ const [currentSizeSelected,setcurrentSizeSelected]=useState(null)
   const [showMore,setshowMore]=useState(null)
  
   const currentCardData = useCardData(id)
- 
+
 
 return (
   <div className="flex w-full   overflow-x-hidden flex-col md:flex-row flex-wrap">
@@ -92,7 +92,7 @@ return (
             (showMore ? "md:h-full  " : "md:h-screen md:overflow-hidden ")
           }
         >
-          {currentCardData.view_list?.map((properties, index) =>
+          {(cardInfo.view_list||currentCardData.view_list)?.map((properties, index) =>
             index === 1 ? (
               properties.video_url ? (
                 <video
@@ -148,7 +148,8 @@ return (
          {"\u203A"}
         </button>
       </div>
-      <Accordion currentCardData={currentCardData} />
+      <Accordion currentCardData={cardInfo||currentCardData} />
+      
     </div>
 
     <div className=" md:w-1/3    px-6 flex flex-col gap-y-6 py-6">
@@ -156,16 +157,16 @@ return (
 
     
       <div className="flex justify-between">
-        <div>{currentCardData.attribute_list?.brand}</div>
+        <div>{cardInfo.attribute_list?.brand|| currentCardData.attribute_list?.brand}</div>
         {/* <div>{"stars"}</div> */}
       </div>
       <h1 className=" text-2xl md:text-4xl font-bold">
-        {currentCardData.name}
+        {cardInfo.name|| currentCardData.name}
       </h1>
       <p className="text-sm text-gray-700">
         MRP in Indian currency: <br></br>
         <span className="font-bold">
-          {currentCardData.pricing_information?.currentPrice.toFixed(2)}
+          {cardInfo.pricing_information?.currentPrice.toFixed(2)||currentCardData.pricing_information?.currentPrice.toFixed(2)}
         </span>
         &nbsp; per pair <br></br>
         (Inclusive of all taxes)

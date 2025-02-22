@@ -26,19 +26,25 @@ const SignIn = () => {
     async function checkPassword(password){
       try{const result = await validatePassword(auth,password)
         if(result.isValid){
-            
-           try{
+        
+           
             if(validated.user==="new"){
-            const loginDetails= await createUserWithEmailAndPassword(auth,email,password)
+                try{
+
+                    const loginDetails= await createUserWithEmailAndPassword(auth,email,password)
+                    navigate('/')
+                }catch(e){seterror({e})}
             
            }else{
-            const loginDetails =await signInWithEmailAndPassword(auth,email,password)
+            try{
+
+                const loginDetails =await signInWithEmailAndPassword(auth,email,password)
+                navigate('/')
+            }catch(e){seterror({e})}
            }
             // console.log(loginDetails)
-            navigate('/')
-           } 
+            
            
-           catch(e){console.log(e)}
         } else{
             seterror({result})
         }

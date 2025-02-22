@@ -31,7 +31,7 @@ const CardComponent = (prop) => {
     if (document.exists()) {
       // console.log("Cart Data:", document.data().cartItems);
       dispatch(addItem({length:document.data().cartItems}))
-      console.log(cartItems)
+      
        
     }
   }
@@ -68,34 +68,41 @@ const CardComponent = (prop) => {
   const path =useLocation()
 
   async function sendToDataBase(){
+    
+
+    
     if(count<2 && count>=0){
+      
+
+      
       if(count===1){
         const cardRef= doc(db, auth.currentUser?.uid, cardInfo.id);
          await updateDoc(cardRef, {
          [index]:2// Updating the population field
           });
           // setcount(2)
-          dispatch(manageCount({[index]:2}))
           // console.log({[index]:2})
-          dispatch(addItem())
           await setDoc(doc(db,auth.currentUser?.uid+"cart",auth.currentUser?.uid+"cartItems"),{cartItems:cartItems+1})
-          console.log(cartItems)
+          dispatch(manageCount({[index]:2}))
+          dispatch(addItem())
+          // console.log(cartItems)
       }
       else{
         await setDoc(doc(db, auth.currentUser?.uid, cardInfo.id), {
               cardInfo,[index]:1
             });
             // setcount(1)
-            dispatch(manageCount({[index]:1}))
-            dispatch(addItem())
             // console.log({[index]:1})
             await setDoc(doc(db,auth.currentUser?.uid+"cart",auth.currentUser?.uid+"cartItems"),{cartItems:cartItems+1})
-            console.log(cartItems)
+            dispatch(manageCount({[index]:1}))
+            dispatch(addItem())
+            // console.log(cartItems)
       }
     }
     else{
       alert("More Than 2 Items are not allowed")
     }
+    
   }
 
   async function removeFromDataBase(){
