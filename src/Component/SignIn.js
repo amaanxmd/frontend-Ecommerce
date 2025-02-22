@@ -5,6 +5,7 @@ import { validatePassword ,createUserWithEmailAndPassword,fetchSignInMethodsForE
 import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
+    // const [goBackToSignInSignUp,setgoBackToSignInSignUp]=useState({type:"nothing"})
     const [email,setemail]=useState(null)
     const [password,setpassword]=useState(null)
     const [validated,setvalidated]=useState(false)
@@ -27,20 +28,20 @@ const SignIn = () => {
       try{const result = await validatePassword(auth,password)
         if(result.isValid){
         
-           
+           seterror(null)
             if(validated.user==="new"){
                 try{
 
                     const loginDetails= await createUserWithEmailAndPassword(auth,email,password)
                     navigate('/')
-                }catch(e){seterror({e})}
+                }catch(e){seterror({error:e})}
             
            }else{
             try{
 
                 const loginDetails =await signInWithEmailAndPassword(auth,email,password)
                 navigate('/')
-            }catch(e){seterror({e})}
+            }catch(e){seterror({error:e});console.log(e)}
            }
             // console.log(loginDetails)
             
@@ -78,9 +79,13 @@ const SignIn = () => {
             <h1 className="font-bold text-3xl">{validated?.user==="exist"?"LOGIN TO ADICLUB":validated?.user==="new"?"WELCOME TO ADICLUB!":'YOUR ADICLUB BENEFITS AWAIT'}</h1>
             <p className="text-sm">{validated?.user==="new"?'Create a password to have full access to adiClub benefits and be able to redeem points, save your shipping details and more.':'Get free shipping, discount vouchers and members only products when you’re in adiClub.'}</p>
             {!validated&&<h6 className="font-bold text-lg">Log in or sign up (it’s free)</h6>}
-            <div className={`w-full relative  after:absolute after:top-1/2 after:-translate-y-1/2 after:bg-white after:left-1 hover:after:-translate-y-8 hover:after:text-xs    `}><input key={validated} onChange={(e)=>validated?setpassword(e.target.value):setemail(e.target.value)} className="border w-full py-3 px-2 border-black" type={validated?"password":"email"}/>{error?.errortype&&<div className='text-red-600 text-xs '>Please enter a valid email address</div>}</div>
+            <div className={`w-full relative  after:absolute after:top-1/2 after:-translate-y-1/2 after:bg-white after:left-1 hover:after:-translate-y-8 hover:after:text-xs    `}><input key={validated} onChange={(e)=>validated?setpassword(e.target.value):setemail(e.target.value)} className="border w-full py-3 px-2 border-black" type={validated?"password":"email"}/>{error&&<div className='text-red-600 text-xs '>{error.errortype==="email"?"Please enter a valid email address":error.error?.toString()}</div>}</div>
             {validated?.user==="new"&&<p className='text-gray-400'>Minimum 8 characters with at least one uppercase, one lowercase, one special character and a number.</p>}
-            <button onClick={()=>{validated?checkPassword(password):validateEmail(email)}} className="relative bg-black -mt-2 text-white px-3 pb-4  pt-3 font-semibold text-sm tracking-widest after:h-full after:w-full after:border after:border-black after:absolute after:top-1 after:left-1 ">{validated?.user==="new"?"CREATE PASSWORD ":validated?.user==="exist"?"SIGN IN":"CONTINUE "}&#8594;</button>
+            <div className='flex justify-between w-full'>
+                <button onClick={()=>{validated?checkPassword(password):validateEmail(email)}} className="relative bg-black -mt-2 text-white px-3 pb-4  pt-3 font-semibold text-sm tracking-widest after:h-full after:w-full after:border after:border-black after:absolute after:top-1 after:left-1 ">{validated?.user==="new"?"CREATE PASSWORD ":validated?.user==="exist"?"SIGN IN":"CONTINUE "}&#8594;</button>
+                {validated.user&&<button onClick={()=>{setvalidated(false);seterror(null)}} className="relative text-sm font-semibold -mt-8 ">{validated?.user==="new"?"SIGN IN INSTEAD":"CREATE AN ACCOUNT"}</button>}
+                </div>
+                
             {error?.result&&<div className=' w-full gap-y-1  flex flex-col justify-start border-gray-300'>
                 
                 <div className='flex items-center gap-x-1'>
