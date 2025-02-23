@@ -92,7 +92,7 @@ return (
             (showMore ? "md:h-full  " : "md:h-screen md:overflow-hidden ")
           }
         >
-          {(cardInfo.view_list||currentCardData.view_list)?.map((properties, index) =>
+          {(cardInfo?.view_list||currentCardData?.view_list)?.map((properties, index) =>
             index === 1 ? (
               properties.video_url ? (
                 <video
@@ -157,16 +157,16 @@ return (
 
     
       <div className="flex justify-between">
-        <div>{cardInfo.attribute_list?.brand|| currentCardData.attribute_list?.brand}</div>
+        <div>{cardInfo?.attribute_list?.brand|| currentCardData?.attribute_list?.brand}</div>
         {/* <div>{"stars"}</div> */}
       </div>
       <h1 className=" text-2xl md:text-4xl font-bold">
-        {cardInfo.name|| currentCardData.name}
+        {cardInfo?.name|| currentCardData?.name}
       </h1>
       <p className="text-sm text-gray-700">
         MRP in Indian currency: <br></br>
         <span className="font-bold">
-          {cardInfo.pricing_information?.currentPrice.toFixed(2)||currentCardData.pricing_information?.currentPrice.toFixed(2)}
+          {cardInfo?.pricing_information?.currentPrice.toFixed(2)||currentCardData?.pricing_information?.currentPrice.toFixed(2)}
         </span>
         &nbsp; per pair <br></br>
         (Inclusive of all taxes)

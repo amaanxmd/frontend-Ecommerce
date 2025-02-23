@@ -41,7 +41,7 @@ const SignIn = () => {
 
                 const loginDetails =await signInWithEmailAndPassword(auth,email,password)
                 navigate('/')
-            }catch(e){seterror({error:e});console.log(e)}
+            }catch(e){seterror({error:e});}
            }
             // console.log(loginDetails)
             

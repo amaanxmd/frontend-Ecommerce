@@ -188,8 +188,9 @@ const CardComponent = (prop) => {
     }
     
     return (
-      <div onMouseEnter={()=>{setaddToCart(true)}} onMouseLeave={()=>{setaddToCart(false);setcardData({image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url})}} className={ ('w-[calc((100%-4px)/2)] sm:w-[calc((100%-24px)/3)] md:w-[calc((100%-36px)/4)] lg:w-[calc((100%-36px)/4)] ')+(addToCart?'h-72 z-10':'h-full') }>
-        <div className="container w-full  hover:border-2 hover:border-black relative bg-white" >
+      <div onMouseEnter={()=>{setaddToCart(true)}} onMouseLeave={()=>{setaddToCart(false);setcardData({image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url})}} className={ ('w-[calc((100%-4px)/2)] sm:w-[calc((100%-24px)/3)] md:w-[calc((100%-36px)/4)] lg:w-[calc((100%-36px)/4)] ')+(addToCart?'sm:h-72 sm:z-10':'sm:h-full') }>
+        <div className="container w-full h-full sm:h-auto border-2 sm:border-0 sm:hover:border-2 sm:hover:border-black relative bg-white" >
+          <div className="flex h-full flex-col">
           <div onMouseEnter={()=>setimageHovered(true)} onMouseLeave={()=>{setimageHovered(false)}}>
           <div className="header flex justify-between w-full absolute top-0 px-2 py-2">
             
@@ -207,7 +208,7 @@ const CardComponent = (prop) => {
           </div>
           {<div className={`${addToCart?"":"sm:hidden"}`}><SubCards cardData={{image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url}} setcardData={setcardData} subCardData ={subCardData} /></div>}
           {/* {addToCart &&<SubCards cardData={{image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url}} setcardData={setcardData} subCardData ={subCardData} />} */}
-          <div className="content px-4">
+          <div className="content grow px-4">
           {cardData.price.standard_price===(cardData.price.currentPrice||cardData.price.sale_price||cardData.price.standard_price)?<div className="font-semibold text-sm tracking-wider mb-2 ">{cardData.price.standard_price.toFixed(2)}</div>:<div className="pricingWrapper mb-2"><div className="text-red-700 font-semibold text-sm tracking-wider">{cardData.price.sale_price?.toFixed(2)||cardData.price.currentPrice?.toFixed(2)}</div><div className="flex flex-wrap gap-2" ><span className="line-through decoration-1 text-xs tracking-wider text-gray-500">{cardData.price.standard_price.toFixed(2)}</span><span className="text-red-600 text-xs tracking-wider">{cardData.price.discount_text||"-"+(Math.ceil((cardData.price.standard_price-cardData.price.sale_price)*100/cardData.price.standard_price))+"%"}</span><span className="text-xs text-gray-500">Original price</span></div></div>}
             
               <h1 className="text-sm ">{cardData.name}</h1>
@@ -215,13 +216,14 @@ const CardComponent = (prop) => {
                
               <div className="text-sm text-gray-500">{attribute_list.gender==="M"?"Men "+attribute_list.sport[0]:attribute_list.gender==="W"?"Women "+attribute_list.sport[0]:attribute_list.brand}</div>
               <div className="text-sm text-gray-500">{subCardData.length+1+" colours"}</div>
-            {auth.currentUser?.email&&<div className={`buttonWrapper ${addToCart?"":"sm:hidden"}  mt-4 mb-4`}>
-              <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
-            </div>}
             {/* {auth.currentUser?.email&&addToCart&&<div className={`buttonWrapper mt-4 mb-4`}>
               <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
-            </div>} */}
+              </div>} */}
           </div>
+              {auth.currentUser?.email&&<div className={`buttonWrapper ${addToCart?"":"sm:hidden"} px-4  mt-4 mb-4`}>
+                <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
+              </div>}
+              </div>
         </div>
       </div>
       

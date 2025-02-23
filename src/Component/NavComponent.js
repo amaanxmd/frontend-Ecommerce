@@ -75,7 +75,7 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
               
                 </div>}
               
-            {<div className={`${hamburger?"":"hidden"} flex flex-col sm:flex-row sm:flex gap-y-3  mt-3 sm:mt-0 sm:gap-2  sm:items-center`}>
+            {<div className={`${hamburger?"":"hidden"} flex flex-col items-start sm:flex-row sm:flex gap-y-3  mt-3 sm:mt-0 sm:gap-2  sm:items-center`}>
               {account&&<User/>}
               {!account&&<button onClick={()=>{navigate('./signin');hamburger&&sethamburger(!hamburger)}} className="bg-black  text-white rounded py-1 mt-3 mb-3 sm:mb-0 sm:mt-0 px-3">Sign In </button>}
               {account&&<button onClick={()=>{signOut(auth);hamburger&&sethamburger(!hamburger)}} className="border  border-black mb-3 sm:mb-0  rounded py-1 px-3">Sign Out</button>}
