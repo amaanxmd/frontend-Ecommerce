@@ -23,7 +23,7 @@ const CardComponent = (prop) => {
   const cartItems =useSelector((store)=>{return store.cart.myitems.length})
   // useEffect(()=>{getCart();getCartCount()},[])
   // useEffect(()=>{getCart();getCartCount()},[])
-  useEffect(()=>{onAuthStateChanged(auth,(user)=>{if(user){getCart();getCartCount()}})},[])
+  useEffect(()=>{console.log("insde useEffect");onAuthStateChanged(auth,(user)=>{if(user){console.log("onauthstateworking");getCart();getCartCount()}})},[])
   const getCartCount =async()=>{
     try{
      if(auth.currentUser){
