@@ -26,7 +26,7 @@ const cartslice = createSlice({
             mystate.myitems.pop()
         },
         clearCart:(mystate)=>{
-              mystate.myitems.length =0
+            //   mystate.myitems.length =0
               mystate.count.fill(0)
             //   return {items:[]}  or do this instead of line 17
         },

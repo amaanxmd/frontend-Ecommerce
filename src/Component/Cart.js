@@ -46,6 +46,7 @@ const getAllData = async()=>{
 async function clearcart(){
 
     dispatch(addItem({length:0}))
+    dispatch(clearCart())
     await updateDoc(doc(db,auth.currentUser.uid+"cart",auth.currentUser.uid+"cartItems"),{
       cartItems:0
     })
