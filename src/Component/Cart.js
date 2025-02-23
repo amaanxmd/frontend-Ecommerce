@@ -44,16 +44,16 @@ const getAllData = async()=>{
     }
 
 async function clearcart(){
-    const tempCartData=cartData
+    // const tempCartData=cartData
     dispatch(addItem({length:0}))
     dispatch(clearCart())
-    setcartData([])
     await updateDoc(doc(db,auth.currentUser.uid+"cart",auth.currentUser.uid+"cartItems"),{
       cartItems:0
     })
- 
-    tempCartData.map(async (data)=>{await deleteDoc(doc(db,auth.currentUser.uid,data.cardInfo.id))})
-
+    
+    cartData.map(async (data)=>{await deleteDoc(doc(db,auth.currentUser.uid,data.cardInfo.id))})
+    setcartData([])
+  
 
 }
 console.log(cartData)
