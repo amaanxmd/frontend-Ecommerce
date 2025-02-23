@@ -55,7 +55,7 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
       <div className="flex flex-col min-h-screen ">
       <div className="w-full overflow-x-hidden">
         <nav className="bar">
-          <div className="navparent px-4 md:px-16 lg:px-32  sm:py-4 flex items-center shadow-md justify-between flex-wrap">
+          <div className="navparent  px-4 md:px-16 lg:px-32  sm:py-4 flex items-center border-2 justify-between flex-wrap">
             <Link className="py-1 sm:py-0" onClick={()=>{hamburger&&sethamburger(!hamburger)}} to={"/"}><AdidasLogo/></Link>
   
             <div className="navchildcontainer relative hidden sm:flex  sm:gap-6 md:gap-10 lg:gap-20">

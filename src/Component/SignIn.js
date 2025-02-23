@@ -1,7 +1,7 @@
 import React from 'react'
 import { CheckMark, GreenCheckMark, RedCross } from './LogoSvgs'
 import { useState } from 'react'
-import { validatePassword ,createUserWithEmailAndPassword,fetchSignInMethodsForEmail,signInWithEmailAndPassword} from 'firebase/auth'
+import { validatePassword ,createUserWithEmailAndPassword,fetchSignInMethodsForEmail,signInWithEmailAndPassword,sendPasswordResetEmail} from 'firebase/auth'
 import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
@@ -25,41 +25,60 @@ const SignIn = () => {
         }
     }
     async function checkPassword(password){
-      try{const result = await validatePassword(auth,password)
-        if(result.isValid){
-        
-           seterror(null)
-            if(validated.user==="new"){
-                try{
+        if(password){
 
-                    const loginDetails= await createUserWithEmailAndPassword(auth,email,password)
-                    navigate('/')
-                }catch(e){seterror({error:e})}
-            
-           }else{
-            try{
-
-                const loginDetails =await signInWithEmailAndPassword(auth,email,password)
-                navigate('/')
-            }catch(e){seterror({error:e});}
-           }
-            // console.log(loginDetails)
-            
-           
-        } else{
-            seterror({result})
-        }
-
-            
-        }
+            try{const result = await validatePassword(auth,password)
+              if(result.isValid){
+              
+                 seterror(null)
+                  if(validated.user==="new"){
+                      try{
       
-      catch(e){
-        console.error(e)
-      }
+                          const loginDetails= await createUserWithEmailAndPassword(auth,email,password)
+                          navigate('/')
+                      }catch(e){seterror({error:e})}
+                  
+                 }else{
+                  try{
+      
+                      const loginDetails =await signInWithEmailAndPassword(auth,email,password)
+                      navigate('/')
+                  }catch(e){seterror({error:e});}
+                 }
+                  // console.log(loginDetails)
+                  
+                 
+              } else{
+                  seterror({result})
+              }
+      
+                  
+              }
+            
+            catch(e){
+              console.error(e)
+            }
+        }else{
+            seterror({errortype:"password"})
+        }
       
     }
+    const actionCodeSettings = {
+        url: "http://localhost:1234/signin", // Redirect URL after password reset
+        handleCodeInApp: true, // Set to true if using email link sign-in
+      };
+     function resetPassword(){
+        seterror({errortype:"passwordReset"})
+         sendPasswordResetEmail(auth, email, actionCodeSettings)
+        .then(() => {
+          console.log("Password reset email sent!");
+        })
+        .catch((error) => {
+          console.error("Error sending password reset email:", error.message);
+        });
+     } 
   return (
-    <div className=" px-3 lg:px-32 pt-4">
+    <div className="grow px-3 lg:px-32 pt-4">
         <div className="flex flex-col sm:flex-row gap-y-10 gap-x-14 w-full  ">
         <div className="flex pb-4 sm:pb-16 order-2 sm:order-1 flex-col gap-y-2 items-start w-full">
             <img src="https://www.adidas.co.in/glass/react/557321e/assets/img/account-portal-page-inline.png" alt="Adidas Page About Us"/>
@@ -76,14 +95,21 @@ const SignIn = () => {
         </div>
         <form onClick={(e)=>e.preventDefault()} className="flex order-1 sm:order-2 flex-col gap-y-5 items-start w-full relative">
             <img src="https://account-frontends.adidas.com/_astro/adiclub-blue-desktop.CG118tV1.svg"/>
+            <div className='flex flex-wrap gap-2 items-start '>
             <h1 className="font-bold text-3xl">{validated?.user==="exist"?"LOGIN TO ADICLUB":validated?.user==="new"?"WELCOME TO ADICLUB!":'YOUR ADICLUB BENEFITS AWAIT'}</h1>
+            {validated.user==="exist"&&<button onClick={resetPassword} className="relative border-b text-xs font-semibold  ">FORGOT PASSWORD?</button>}
+
+            </div>
             <p className="text-sm">{validated?.user==="new"?'Create a password to have full access to adiClub benefits and be able to redeem points, save your shipping details and more.':'Get free shipping, discount vouchers and members only products when you’re in adiClub.'}</p>
             {!validated&&<h6 className="font-bold text-lg">Log in or sign up (it’s free)</h6>}
-            <div className={`w-full relative  after:absolute after:top-1/2 after:-translate-y-1/2 after:bg-white after:left-1 hover:after:-translate-y-8 hover:after:text-xs    `}><input key={validated} onChange={(e)=>validated?setpassword(e.target.value):setemail(e.target.value)} className="border w-full py-3 px-2 border-black" type={validated?"password":"email"}/>{error&&<div className='text-red-600 text-xs '>{error.errortype==="email"?"Please enter a valid email address":error.error?.toString()}</div>}</div>
+            <div className={`w-full relative  after:absolute after:top-1/2 after:-translate-y-1/2 after:bg-white after:left-1 hover:after:-translate-y-8 hover:after:text-xs    `}><input key={validated} onChange={(e)=>validated?setpassword(e.target.value):setemail(e.target.value)} className="border w-full py-3 px-2 border-black" type={validated?"password":"email"}/>{error&&<div className={`text-red-600 ${error.errortype==="passwordReset"?"text-[12px]":"text-sm"} `}>{error.errortype==="email"?"Please enter a valid email address":error.errortype==="password"?"Password field cannot be blank":error.errortype==="passwordReset"?"Password reset link sent to mail successfully":error.error?.toString()}</div>}</div>
             {validated?.user==="new"&&<p className='text-gray-400'>Minimum 8 characters with at least one uppercase, one lowercase, one special character and a number.</p>}
             <div className='flex justify-between w-full'>
                 <button onClick={()=>{validated?checkPassword(password):validateEmail(email)}} className="relative bg-black -mt-2 text-white px-3 pb-4  pt-3 font-semibold text-sm tracking-widest after:h-full after:w-full after:border after:border-black after:absolute after:top-1 after:left-1 ">{validated?.user==="new"?"CREATE PASSWORD ":validated?.user==="exist"?"SIGN IN":"CONTINUE "}&#8594;</button>
-                {validated.user&&<button onClick={()=>{setvalidated(false);seterror(null)}} className="relative text-sm font-semibold -mt-8 ">{validated?.user==="new"?"SIGN IN INSTEAD":"CREATE AN ACCOUNT"}</button>}
+                <div className='-mt-5 flex flex-col gap-y-4'>
+                   
+                    {validated.user&&<button onClick={()=>{setvalidated(false);seterror(null);setemail(null)}} className="relative text-xs font-semibold  ">{validated?.user==="new"?"SIGN IN INSTEAD":"CREATE AN ACCOUNT"}</button>}
+                    </div>
                 </div>
                 
             {error?.result&&<div className=' w-full gap-y-1  flex flex-col justify-start border-gray-300'>
