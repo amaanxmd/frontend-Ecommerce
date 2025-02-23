@@ -64,7 +64,7 @@ const SignIn = () => {
       
     }
     const actionCodeSettings = {
-        url: "adidas-orcin.vercel.app/signin", // Redirect URL after password reset
+        url: "https://adidas-orcin.vercel.app/signin", // Redirect URL after password reset
         handleCodeInApp: true, // Set to true if using email link sign-in
       };
     // const newActionCodeSettings ={
