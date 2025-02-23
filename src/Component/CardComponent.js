@@ -35,7 +35,7 @@ const CardComponent = (prop) => {
     if (document.exists()) {
       // console.log("Cart Data:", document.data().cartItems);
       dispatch(addItem({length:document.data().cartItems}))
-      console.log("dipatched")
+      // console.log("dipatched")
       
        
     }
@@ -51,6 +51,7 @@ const CardComponent = (prop) => {
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data()[index]);
         dispatch(manageCount({[index]:docSnap.data()[index]}))
+        console.log("dispatched")
         // dispatch(addItem())
         // console.log({[index]:docSnap.data()[index]})
         // console.log("holdup")
@@ -60,6 +61,7 @@ const CardComponent = (prop) => {
         // docSnap.data() will be undefined in this case
         // console.log("No such document!");
         dispatch(manageCount({[index]:0}))
+        console.log("setto zero")
         // console.log("doesn't exist")
         // dispatch(addItem([]))
         // setcount(0) ;
