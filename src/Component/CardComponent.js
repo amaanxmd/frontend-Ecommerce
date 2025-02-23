@@ -67,7 +67,8 @@ const CardComponent = (prop) => {
         // setcount(0) ;
       }
     }catch(e){
-      // console.log(e)
+      console.log(e)
+
     }
   
   }
