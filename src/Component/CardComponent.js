@@ -225,7 +225,7 @@ const CardComponent = (prop) => {
               <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
               </div>} */}
           </div>
-              {auth.currentUser?.email&&<div className={`buttonWrapper ${addToCart?"":"sm:hidden"} px-4  mt-4 mb-4`}>
+              {auth.currentUser&&<div className={`buttonWrapper ${addToCart?"":"sm:hidden"} px-4  mt-4 mb-4`}>
                 <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
               </div>}
               </div>
