@@ -47,7 +47,7 @@ const CardComponent = (prop) => {
    const getCart = async ()=>{
     try{
 
-      docSnap= await getDoc(doc(db,auth.currentUser?.uid,cardInfo.id))
+      const docSnap= await getDoc(doc(db,auth.currentUser?.uid,cardInfo.id))
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data()[index]);
         dispatch(manageCount({[index]:docSnap.data()[index]}))
