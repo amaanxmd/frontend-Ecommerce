@@ -23,7 +23,7 @@ const CardComponent = (prop) => {
   const cartItems =useSelector((store)=>{return store.cart.myitems.length})
   // useEffect(()=>{getCart();getCartCount()},[])
   // useEffect(()=>{getCart();getCartCount()},[])
-  useEffect(()=>{console.log("insde useEffect");onAuthStateChanged(auth,(user)=>{if(user){console.log("onauthstateworking");getCart();getCartCount()}})},[])
+  useEffect(()=>{onAuthStateChanged(auth,(user)=>{if(user){getCart();getCartCount()}})},[])
   const getCartCount =async()=>{
     try{
      if(auth.currentUser){
@@ -51,7 +51,7 @@ const CardComponent = (prop) => {
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data()[index]);
         dispatch(manageCount({[index]:docSnap.data()[index]}))
-        console.log("dispatched")
+        // console.log("dispatched")
         // dispatch(addItem())
         // console.log({[index]:docSnap.data()[index]})
         // console.log("holdup")
@@ -61,13 +61,13 @@ const CardComponent = (prop) => {
         // docSnap.data() will be undefined in this case
         // console.log("No such document!");
         dispatch(manageCount({[index]:0}))
-        console.log("setto zero")
+        // console.log("setto zero")
         // console.log("doesn't exist")
         // dispatch(addItem([]))
         // setcount(0) ;
       }
     }catch(e){
-      console.log(e)
+      // console.log(e)
 
     }
   
