@@ -19,6 +19,7 @@ const CardComponent = (prop) => {
  
   const dispatch = useDispatch()
   const count = useSelector((store)=>{return store.cart.count[index]})
+  const AllCount =useSelector((store)=>store.cart.count)
   const cartItems =useSelector((store)=>{return store.cart.myitems.length})
   // useEffect(()=>{getCart();getCartCount()},[])
   // useEffect(()=>{getCart();getCartCount()},[])
@@ -34,6 +35,7 @@ const CardComponent = (prop) => {
     if (document.exists()) {
       // console.log("Cart Data:", document.data().cartItems);
       dispatch(addItem({length:document.data().cartItems}))
+      console.log("dipatched")
       
        
     }
