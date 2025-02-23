@@ -64,17 +64,17 @@ const SignIn = () => {
       
     }
     const actionCodeSettings = {
-        url: "http://localhost:1234/signin", // Redirect URL after password reset
+        url: "https://adidas-orcin.vercel.app", // Redirect URL after password reset
         handleCodeInApp: true, // Set to true if using email link sign-in
       };
      function resetPassword(){
-        seterror({errortype:"passwordReset"})
          sendPasswordResetEmail(auth, email, actionCodeSettings)
-        .then(() => {
-          console.log("Password reset email sent!");
+         .then(() => {
+             
+             seterror({errortype:"passwordReset"})
         })
         .catch((error) => {
-          console.error("Error sending password reset email:", error.message);
+          seterror({error:error})
         });
      } 
   return (
