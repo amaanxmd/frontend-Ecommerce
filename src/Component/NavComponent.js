@@ -10,6 +10,7 @@ import { onAuthStateChanged ,signOut, } from "firebase/auth";
 import { auth,db } from "../utils/firebase";
 import { getDocs,collection,getCountFromServer,doc,getDoc } from "firebase/firestore";
 import { addItem } from "../utils/slice";
+import Footer from "./Footer";
 
 import User from "./User"
 
@@ -51,6 +52,7 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
     // }
    
     return (
+      <div className="flex flex-col min-h-screen ">
       <div className="w-full overflow-x-hidden">
         <nav className="bar">
           <div className="navparent px-4 md:px-16 lg:px-32  sm:py-4 flex items-center shadow-md justify-between flex-wrap">
@@ -68,6 +70,7 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
                {hamburger&& <div className=" sm:hidden w-full shrink-0 bg-white flex flex-col gap-y-3 mt-3   ">
                 <div onClick={()=>sethamburger(!hamburger)} className="navchild1 border-b"><Link className="home font-medium" to="/">Home</Link></div>
               <div onClick={()=>sethamburger(!hamburger)} className="navchild2 border-b"><Link  className="about font-medium" to="/about">About</Link></div>
+              <div onClick={()=>sethamburger(!hamburger)}  className="navchild8 border-b  "><Link className="font-medium" to ="/cart">cart-Items ({cartItems||cartItemsFromFirebase})</Link></div>
               {/* <div className="navchild6">online Status: {useOnline()?'true':"false"}</div> */}
               
                 </div>}
@@ -76,11 +79,14 @@ useEffect(()=>{if(cartItems===0)setcartItemsFromFirebase(0),[cartItems]})
               {account&&<User/>}
               {!account&&<button onClick={()=>{navigate('./signin');hamburger&&sethamburger(!hamburger)}} className="bg-black  text-white rounded py-1 mt-3 mb-3 sm:mb-0 sm:mt-0 px-3">Sign In </button>}
               {account&&<button onClick={()=>{signOut(auth);hamburger&&sethamburger(!hamburger)}} className="border  border-black mb-3 sm:mb-0  rounded py-1 px-3">Sign Out</button>}
+        
             </div>}
           </div>
         </nav>
-       {path.pathname==="/"&&<div className="relative"> <img src={img3} alt="lebron-nike" className=" relative sliderimg w-full h-60 sm:h-72 md:h-80 lg:h-fit translate-x-3 sm:translate-x-0 scale-x-[2.15] sm:scale-x-[1.3] md:scale-x-[1.5] lg:scale-x-[1]" /> <div  className="navchild8 ml-2  sm:hidden p-2  border border-black font-semibold absolute top-full mt-3 left-0 z-10 "><Link className=" flex  flex-wrap" to ="/cart">cart-Items ({cartItems||cartItemsFromFirebase})</Link></div></div>}
+       {path.pathname==="/"&&<div className="relative"> <img src={img3} alt="lebron-nike" className=" relative sliderimg w-full h-60 sm:h-72 md:h-80 lg:h-fit translate-x-3 sm:translate-x-0 scale-x-[2.15] sm:scale-x-[1.3] md:scale-x-[1.5] lg:scale-x-[1]" /> </div>}
+      </div>
         <Outlet/>
+        <Footer/>
       </div>
     );
   };

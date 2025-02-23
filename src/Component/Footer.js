@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='flex flex-col items-center justify-center w-full bg-gray-800 gap-y-6 py-6'>
+    <div className='flex  flex-col items-center justify-center w-full bg-gray-800 gap-y-6 py-6'>
 
         <table>
             <tr>

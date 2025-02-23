@@ -11,6 +11,7 @@ import ProductDetails  from "./Component/ProductDetails";
 import Error from "./Component/Error"
 import 'dotenv/config'
 import SignIn from "./Component/SignIn";
+import Footer from "./Component/Footer";
 
 
 const Lazy = lazy(()=>{return import("./Component/lazyloading")})
@@ -35,6 +36,7 @@ const App = () => {
       path:"/",
       element:<Body />
     },
+    
     {path:"/contact",
       element:<Contact></Contact>
     },

@@ -61,7 +61,7 @@ const SignIn = () => {
   return (
     <div className=" px-3 lg:px-32 pt-4">
         <div className="flex flex-col sm:flex-row gap-y-10 gap-x-14 w-full  ">
-        <div className="flex order-2 sm:order-1 flex-col gap-y-2 items-start w-full">
+        <div className="flex pb-4 sm:pb-16 order-2 sm:order-1 flex-col gap-y-2 items-start w-full">
             <img src="https://www.adidas.co.in/glass/react/557321e/assets/img/account-portal-page-inline.png" alt="Adidas Page About Us"/>
             <h1 className="font-bold text-4xl">JOIN THE CLUB. GET<br></br> REWARDED.</h1>
             <span className="my-1">JOIN ADICLUB. GET REWARDED TODAY.</span>

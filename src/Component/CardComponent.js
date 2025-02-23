@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import SubCards from "./SubCards";
 import { auth,db } from "../utils/firebase";
 import { addDoc,collection,getDocs,deleteDoc ,setDoc,doc,updateDoc,getDoc} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 const CardComponent = (prop) => {
   const {cardInfo, cardInfo:{id,name,pricing_information,product_listing_assets:images,attribute_list,product_link_list:subCardData,},index  } = prop;
@@ -19,7 +20,9 @@ const CardComponent = (prop) => {
   const dispatch = useDispatch()
   const count = useSelector((store)=>{return store.cart.count[index]})
   const cartItems =useSelector((store)=>{return store.cart.myitems.length})
-  useEffect(()=>{getCart();getCartCount()},[])
+  // useEffect(()=>{getCart();getCartCount()},[])
+  // useEffect(()=>{getCart();getCartCount()},[])
+  useEffect(()=>{onAuthStateChanged(auth,(user)=>{if(user){getCart();getCartCount()}})},[])
   const getCartCount =async()=>{
     try{
      if(auth.currentUser){
@@ -192,6 +195,7 @@ const CardComponent = (prop) => {
             
             <AdidasLogo width={30}/>
             <div className="bagandcoutWrapper flex relative">
+              <div  className={`${count?"absolute rounded-full w-4 h-4 text-xs -right-1 bg-black text-white leading-tight text-center -top-1/4":""}`}>{count?count:""}</div>
             <img src={img2} alt="bagIcon" className='bag w-6' />
             
 
@@ -201,7 +205,8 @@ const CardComponent = (prop) => {
           { id && <Link to={`/${id}`}  state={{index,cardInfo}}>{imageHovered?<img className="img "  src={cardData.hoverImage} alt="shoeimage" />:<img className="img" src={cardData.image} alt="shoeimage" />}</Link>}
           </div>
           </div>
-          {addToCart &&<SubCards cardData={{image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url}} setcardData={setcardData} subCardData ={subCardData} />}
+          {<div className={`${addToCart?"":"sm:hidden"}`}><SubCards cardData={{image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url}} setcardData={setcardData} subCardData ={subCardData} /></div>}
+          {/* {addToCart &&<SubCards cardData={{image:images[0].image_url,price:pricing_information,name:name,hoverImage:images[1].image_url}} setcardData={setcardData} subCardData ={subCardData} />} */}
           <div className="content px-4">
           {cardData.price.standard_price===(cardData.price.currentPrice||cardData.price.sale_price||cardData.price.standard_price)?<div className="font-semibold text-sm tracking-wider mb-2 ">{cardData.price.standard_price.toFixed(2)}</div>:<div className="pricingWrapper mb-2"><div className="text-red-700 font-semibold text-sm tracking-wider">{cardData.price.sale_price?.toFixed(2)||cardData.price.currentPrice?.toFixed(2)}</div><div className="flex flex-wrap gap-2" ><span className="line-through decoration-1 text-xs tracking-wider text-gray-500">{cardData.price.standard_price.toFixed(2)}</span><span className="text-red-600 text-xs tracking-wider">{cardData.price.discount_text||"-"+(Math.ceil((cardData.price.standard_price-cardData.price.sale_price)*100/cardData.price.standard_price))+"%"}</span><span className="text-xs text-gray-500">Original price</span></div></div>}
             
@@ -210,9 +215,12 @@ const CardComponent = (prop) => {
                
               <div className="text-sm text-gray-500">{attribute_list.gender==="M"?"Men "+attribute_list.sport[0]:attribute_list.gender==="W"?"Women "+attribute_list.sport[0]:attribute_list.brand}</div>
               <div className="text-sm text-gray-500">{subCardData.length+1+" colours"}</div>
-            {auth.currentUser?.email&&addToCart&&<div className="buttonWrapper  mt-4 mb-4">
-              <button className="addCart  text-black border  w-full py-2 px-1 " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
+            {auth.currentUser?.email&&<div className={`buttonWrapper ${addToCart?"":"sm:hidden"}  mt-4 mb-4`}>
+              <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
             </div>}
+            {/* {auth.currentUser?.email&&addToCart&&<div className={`buttonWrapper mt-4 mb-4`}>
+              <button className="addCart  text-black border  w-full py-2 px-1  " onClick={()=>{path.pathname==="/"?sendToDataBase():removeFromDataBase()}}>{path.pathname==="/"?"Add to Cart":"Remove from Cart"}</button>
+            </div>} */}
           </div>
         </div>
       </div>

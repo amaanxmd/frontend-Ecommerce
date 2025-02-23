@@ -4,6 +4,7 @@ import useCardData from "../utils/useCardData";
 import { useState, useEffect } from "react";
 import { useOnline } from "../utils/useOnline";
 import FilterandSort from "./FilterandSort";
+import Footer from "./Footer";
 
 
 
@@ -30,7 +31,9 @@ const Body = () => {
   const status =useOnline()
 // if(status ===false){return <div>Please turn on the internet connection</div>}
   return  (
-    <div className={`sm:px-4 md:px-16 lg:px-32 ${filteredData.length<20 && "pb-64"} pb-32`}>
+    <div className="grow">
+    <div className={`sm:px-4 md:px-16 lg:px-32 `}>
+    {/* ${filteredData.length<20 && "pb-64"} pb-32 */}
      
     
       <div className="filterResetInput px-2 sm:px-0 flex">
@@ -50,7 +53,7 @@ const Body = () => {
         })}
          
       </div>
-      {filteredData.length>20&&<div className="flex justify-center gap-x-2 pt-16">
+      {filteredData.length>20&&<div className="flex justify-center gap-x-2 py-16">
         
         
         <button disabled={prevAndNext.prev<=0?true:false} onClick={()=>{setprevAndNext({prev:prevAndNext.prev<=0?0:prevAndNext.prev-20,next:prevAndNext.prev<=0?prevAndNext.next:prevAndNext.next-20})}} className={`border ${prevAndNext.prev<=0 && "bg-gray-100"} border-black px-4 py-2`}>Previous</button>
@@ -58,8 +61,9 @@ const Body = () => {
         
         
         </div>}
-       
     </div>
+       
+       </div>
   );
 };
 const Error = ()=>{

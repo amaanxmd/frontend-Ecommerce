@@ -242,7 +242,7 @@ return (
       </div>
       
     </div>
-    <Footer/>
+    
   </div>
 );
   
