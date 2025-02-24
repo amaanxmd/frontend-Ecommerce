@@ -89,7 +89,7 @@ return ( <div className="grow aboutBody w-full ">
    <img alt='keyFacts' src="https://res.cloudinary.com/confirmed-web/image/upload/c_lfill,w_1000/v1710174644/adidas-group/images/2024/Misson-en-03-2024_x6irvw.png"/>
   <p className="mt-8">Athletes do not settle for average. And neither do we. We have a clear mission: To be the best sports brand in the world. Every day, we come to work to create and sell the best sports products in the world, and to offer the best service and consumer experience – and to do it all in a sustainable way. We are the best when we are the credible, inclusive, and sustainable leader in our industry.</p>
    </div>
-   <div className="relative   "><div className="absolute top-0 left-0 w-full h-full bg-black/30"></div><img className="" alt="discoverHistory" src="https://res.cloudinary.com/confirmed-web/image/upload/v1705911092/adidas-group/teaser/discover-our-story_amzzxz.jpg"/></div>
+   <div className="relative   "><div className="absolute top-0 left-0 w-full h-full bg-black/30"></div><img className="h-full w-full" alt="discoverHistory" src="https://res.cloudinary.com/confirmed-web/image/upload/v1705911092/adidas-group/teaser/discover-our-story_amzzxz.jpg"/></div>
   </div>
 
   {/* <div  className={`w-full h-full flex shrink-0  `}>
